@@ -1,0 +1,21 @@
+{
+  "name": "timbre-ornament",
+  "version": "0.1.0",
+  "description": "Tiny MIDI-reactive canvas decoration for ordinary websites.",
+  "main": "ornament.js",
+  "files": [
+    "ornament.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "midi",
+    "web-midi",
+    "canvas",
+    "visualizer",
+    "decorative",
+    "interactive"
+  ],
+  "author": "",
+  "license": "MIT"
+}

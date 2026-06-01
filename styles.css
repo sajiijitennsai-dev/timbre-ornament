@@ -1,0 +1,312 @@
+:root {
+  color-scheme: dark;
+  --bg: #07090d;
+  --ink: #f7fbff;
+  --muted: #aab8c6;
+  --line: rgba(255, 255, 255, 0.18);
+  --panel: rgba(8, 11, 16, 0.66);
+  --accent: #79f2c0;
+  --accent-2: #ffcf5a;
+  --accent-3: #ff5f7a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family:
+    "Segoe UI",
+    "Noto Sans JP",
+    system-ui,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+select {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+}
+
+button {
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+select {
+  width: 100%;
+  color-scheme: dark;
+}
+
+.primary {
+  border-color: rgba(121, 242, 192, 0.62);
+  background: linear-gradient(135deg, rgba(121, 242, 192, 0.94), rgba(255, 207, 90, 0.86));
+  color: #06100d;
+}
+
+#visualizer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.app {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  grid-template:
+    "top top" auto
+    "panel meters" 1fr
+    "keys keys" auto / minmax(300px, 520px) minmax(180px, 1fr);
+  gap: clamp(12px, 1.8vw, 14px);
+  padding: clamp(14px, 2vw, 20px);
+  pointer-events: none;
+}
+
+.topbar,
+.instrument-panel,
+.keyboard,
+.meters {
+  pointer-events: auto;
+}
+
+.topbar {
+  display: flex;
+  grid-area: top;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 4.8rem);
+  line-height: 0.86;
+}
+
+.status {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 13px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-size: 0.88rem;
+  backdrop-filter: blur(16px);
+}
+
+.instrument-panel,
+.meters {
+  align-self: end;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent 44%),
+    var(--panel);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(22px);
+}
+
+.instrument-panel {
+  display: grid;
+  grid-area: panel;
+  gap: 12px;
+  padding: clamp(14px, 2vw, 16px);
+}
+
+.tone-readout {
+  display: grid;
+  gap: 4px;
+}
+
+.tone-readout span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.tone-readout strong {
+  min-height: 1.05em;
+  font-size: clamp(2.4rem, 7vw, 4.2rem);
+  line-height: 0.9;
+}
+
+.tone-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.tone {
+  display: grid;
+  min-height: 48px;
+  align-content: center;
+  gap: 4px;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.tone[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--tone-color) 72%, white);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--tone-color) 40%, transparent), rgba(255, 255, 255, 0.08));
+}
+
+.tone b,
+.tone small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tone small {
+  color: var(--muted);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr minmax(120px, 1.3fr) auto;
+  gap: 10px;
+}
+
+.keyboard {
+  display: grid;
+  grid-area: keys;
+  grid-template-columns: repeat(13, minmax(28px, 1fr));
+  align-items: end;
+  height: clamp(76px, 10vh, 88px);
+  gap: 5px;
+}
+
+.key {
+  position: relative;
+  height: 100%;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(249, 252, 255, 0.88);
+  color: #121722;
+  padding: 0;
+}
+
+.key.black {
+  height: 64%;
+  background: rgba(14, 17, 23, 0.92);
+  color: var(--ink);
+}
+
+.key.active {
+  background: var(--accent);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--accent) 64%, transparent);
+}
+
+.meters {
+  display: grid;
+  grid-area: meters;
+  gap: 14px;
+  justify-self: end;
+  width: min(320px, 100%);
+  padding: 18px;
+}
+
+.meters div {
+  display: grid;
+  gap: 8px;
+}
+
+.meters span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.meters i {
+  display: block;
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.meters i::before {
+  content: "";
+  display: block;
+  width: calc(var(--meter, 0) * 100%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+}
+
+@media (max-width: 780px) {
+  body {
+    overflow: auto;
+  }
+
+  .app {
+    min-height: 100svh;
+    grid-template:
+      "top" auto
+      "panel" auto
+      "meters" auto
+      "keys" minmax(92px, auto) / 1fr;
+  }
+
+  .topbar {
+    display: grid;
+  }
+
+  .instrument-panel,
+  .meters {
+    align-self: auto;
+    width: 100%;
+  }
+
+  .controls,
+  .tone-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .keyboard {
+    grid-template-columns: repeat(7, minmax(34px, 1fr));
+    height: auto;
+  }
+
+  .key {
+    min-height: 72px;
+  }
+}

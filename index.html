@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timbre Atlas</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas id="visualizer" aria-hidden="true"></canvas>
+
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MIDI Reactive Site</p>
+          <h1>Timbre Atlas</h1>
+        </div>
+        <div class="status" id="status">MIDI待機中</div>
+      </header>
+
+      <section class="instrument-panel" aria-label="音色">
+        <div class="tone-readout">
+          <span id="toneName">Crystal Keys</span>
+          <strong id="noteName">--</strong>
+        </div>
+
+        <div class="tone-grid" id="toneGrid" aria-label="音色選択"></div>
+
+        <div class="controls" aria-label="MIDI操作">
+          <button class="primary" id="midiButton">MIDI接続</button>
+          <select id="inputSelect" aria-label="MIDI入力">
+            <option value="">入力なし</option>
+          </select>
+          <button id="panicButton">停止</button>
+        </div>
+      </section>
+
+      <section class="keyboard" id="keyboard" aria-label="仮想鍵盤"></section>
+
+      <aside class="meters" aria-label="反応メーター">
+        <div>
+          <span>Attack</span>
+          <i id="attackMeter"></i>
+        </div>
+        <div>
+          <span>Body</span>
+          <i id="bodyMeter"></i>
+        </div>
+        <div>
+          <span>Air</span>
+          <i id="airMeter"></i>
+        </div>
+      </aside>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
